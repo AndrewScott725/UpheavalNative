@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+import os
+
+env = SConscript("godot-cpp/SConstruct")
+env.Append(CPPPATH=["src", "../crowd_solver"])
+sources = Glob("src/*.cpp") + ["../crowd_solver/crowd_solver_core.cpp"]
+
+suffix = env["suffix"]
+lib = env.SharedLibrary(
+    target="bin/upheaval_crowd{}".format(suffix),
+    source=sources,
+)
+Default(lib)

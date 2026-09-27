@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bupheaval0001"]
+
+[ext_resource type="Script" path="res://view/Main.gd" id="1_main"]
+[ext_resource type="PackedScene" path="res://ui/BattlefieldRoot.tscn" id="2_battle"]
+[ext_resource type="PackedScene" path="res://ui/HUDRoot.tscn" id="3_hud"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_main")
+
+[node name="BattlefieldRoot" parent="." instance=ExtResource("2_battle")]
+layout_mode = 1
+
+[node name="HUDRoot" parent="." instance=ExtResource("3_hud")]
+layout_mode = 1
