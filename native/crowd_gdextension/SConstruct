@@ -6,6 +6,27 @@ env.Append(CPPPATH=["src", "../crowd_solver"])
 sources = Glob("src/*.cpp") + ["../crowd_solver/crowd_solver_core.cpp"]
 
 suffix = env["suffix"]
+
+if env["platform"] == "windows":
+    target = "bin/upheaval_crowd{}.dll".format(suffix)
+elif env["platform"] == "macos":
+    target = "bin/libupheaval_crowd{}.dylib".format(suffix)
+else:
+    target = "bin/libupheaval_crowd{}.so".format(suffix)
+
+lib = env.SharedLibrary(
+    target=target,
+    source=sources,
+)
+
+Default(lib)#!/usr/bin/env python
+import os
+
+env = SConscript("godot-cpp/SConstruct")
+env.Append(CPPPATH=["src", "../crowd_solver"])
+sources = Glob("src/*.cpp") + ["../crowd_solver/crowd_solver_core.cpp"]
+
+suffix = env["suffix"]
 lib = env.SharedLibrary(
     target="bin/upheaval_crowd{}".format(suffix),
     source=sources,
